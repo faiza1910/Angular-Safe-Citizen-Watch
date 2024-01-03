@@ -1,0 +1,28 @@
+<div class="baddie-details-container">
+    <h2>Baddie Details</h2>
+    <div class="detail-item">
+        <strong>Name:</strong> {{ baddie?.data?.name }}
+    </div>
+    <div class="detail-item">
+        <strong>Location:</strong> {{ baddie?.data?.location }}
+    </div>
+    <div class="detail-item">
+        <strong>Reporter's Name:</strong> {{ baddie?.data?.reporterName }}
+    </div>
+    <div class="detail-item">
+        <strong>Reporter's Number:</strong> {{ baddie?.data?.reporterNumber }}
+    </div>
+    <div class="detail-item">
+        <strong>Status:</strong> {{ baddie?.data?.status? 'Open' : 'Resolved' }} <button class="change" (click)="changeStatus(this.key)">Change</button>
+    </div>
+    <div class="detail-item">
+        <strong>Time Reported:</strong> {{ baddie?.data?.date | date:'medium' }}
+    </div>
+    <div class="detail-item">
+        <strong>Picture:</strong> {{ baddie?.data?.picture }}
+    </div>
+    <div class="detail-item">
+        <strong>Extra Info:</strong> {{ baddie?.data?.extraInfo }}
+    </div>
+    <button class="back-button" (click)="goBack()">Back</button>
+</div>

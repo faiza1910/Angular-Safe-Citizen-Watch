@@ -1,0 +1,103 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th (click)="sortBy('location')">Location</th>
+            <th (click)="sortBy('name')">Baddie's Name</th>
+            <th (click)="sortBy('date')">Time Reported</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of table">
+            <td>{{ item?.data?.location }}</td>
+            <td>{{ item?.data?.name }}</td>
+            <td>{{ item?.data?.date | date:'medium' }}</td>
+            <td>{{ item?.data?.status? 'Open' : 'Resolved' }}</td>
+            <td><a class="detLink" [routerLink]="['/baddie-view', item.key]" (click)="showMoreInfo(item.key)">MORE INFO</a></td>
+            <td><button (click)="deleteItem(item.key)" class="del">&times;</button></td>
+        </tr>
+    </tbody>
+
+
+
+</table>
+<button (click)="toggleVisibility()">CREATE NUISANCE REPORT</button>
+<form *ngIf="isVisible"
+[formGroup]="form"
+(ngSubmit)="onSubmit()">
+    
+    <fieldset
+        class="d-grid gap-2 col-12"
+    >
+        <legend>NUISANCE REPORT</legend>
+        <div class="name">
+            <label for="name">Baddie's Name: </label>
+            <input 
+                type="text"
+                name="name"
+                placeholder="NAME"
+                formControlName="name"
+            >
+            
+        </div>
+        <div class="location">
+            <label for="location">Location: </label>
+            <select name ='location' formControlName="location">
+                <option *ngFor = 'let location of existingLocation' [value]="location">{{location}}</option>
+            </select>
+        </div>
+        
+        <div class="reporterName">
+            <label for="reporterName">
+                Reported By: 
+            </label>
+            <input 
+                type="text"
+                name="reporterName"
+                formControlName="reporterName"
+                placeholder="REPORTED_BY"
+            >
+        </div>
+        <div class="reporterNumber">
+            <label for="reporterNumber">
+                Reporter's Number: 
+            </label>
+            <input 
+                type="number"
+                name="reporterNumber"
+                formControlName="reporterNumber"
+                placeholder="REPORTER'S NUMBER"
+            >
+        </div>
+        <div class="picture">
+            <label for="picture">Picture:</label>
+            <input 
+                type="text"
+                name="picture"
+                formControlName="picture"
+                placeholder="PICTURE"
+            >
+
+        </div>
+        <div class="extra_info">
+            <label for="extra_info">Extra Info:</label>
+            <input 
+                type="text"
+                name="extra_info"
+                formControlName="extra_info"
+                placeholder="EXTRA INFO"
+            >
+
+        </div>
+
+        <button 
+            class="btn btn-outline-primary disabled-btn"
+            [disabled]="!form.valid"
+        >
+            SAVE
+        </button>
+    </fieldset>
+    
+</form>
